@@ -113,7 +113,7 @@ const logging = {
 
 /** Create the global definition */
 declare global {
-	let logging: {
+	var logging: {
 		log: (message?: any, ...optionalParams: any[]) => void;
 		info: (message?: any, ...optionalParams: any[]) => void;
 		warn: (message?: any, ...optionalParams: any[]) => void;
