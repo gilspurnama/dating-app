@@ -1,8 +1,7 @@
-
 # Dating App
 
-This dating app is a Node.js, Typescript, Express, MongoDB, and REST API project that was designed to serve as learning platform for these tech stack with the approach of creating a dating app.
-
+This dating app is a Node.js, Typescript, Express, MongoDB, and REST API project that was designed to serve as learning platform for these tech stack
+with the approach of creating a dating app.
 
 ## Features
 
@@ -11,13 +10,10 @@ This dating app is a Node.js, Typescript, Express, MongoDB, and REST API project
 - Custom error handler for convenient error handling
 - Custom logging handler for better logging
 
-
-
 ## Prerequisites
 
-Node.js v14.x or later
-MongoDB v7.x or later
-Typescript v5.x or later
+Node.js v14.x or later MongoDB v7.x or later Typescript v5.x or later
+
 # Getting Started
 
 ## Clone the repository
@@ -27,34 +23,57 @@ git clone https://github.com/gilspurnama/dating-app.git
 cd dating-app
 ```
 
+## Connect to DB
+
+If already have MongoDB, change
+
+```
+// .ENV
+
+DB_CONN_STRING='mongodb://<URL>:<port>/<DB>'
+```
+
 ## Install dependencies
+
 ```
 npm install
 ```
 
 ## Build the application
+
 ```
 npm run Build
 ```
 
 ## Run the application
+
 ```
 npm run start
 ```
 
 ## Lint the project's code
+
 ```
 npm run lint
 ```
 
 ## Prettify the project's code
+
 ```
 npm run prettify
 ```
+
+## Set up dummy data
+
+to set up dummy data, execute POST /users/dummy/ it will insert all data inside `/src/utils/dummyData.ts` NOTE: when execute the API, wait about 2-5
+seconds and then just stop the process. The data will be successfully added, but there is still error in the API still loading.
+
 # Service Structure
 
 ## Project Structure
+
 Inside the project, we group each file according to its purpose
+
 ```bash
 ├── src
 |   ├── config
@@ -94,6 +113,7 @@ Inside the project, we group each file according to its purpose
 ├── tsconfig.build.json
 └── tsconfig.json
 ```
+
 `config` directory is for storing configuration files like error handling and logging configuration.
 
 `controller` Responsible for receiving & returning data to routes.
@@ -109,7 +129,9 @@ Inside the project, we group each file according to its purpose
 `util` is to stored utilities needed.
 
 ## Databse Structure
+
 ### User Schema
+
 ```
 email: { type: String, required: true, select: false },
 firstName: { type: String },
@@ -152,7 +174,9 @@ items: {
 }
 }
 ```
+
 ### Message Schema
+
 ```
 timestamp: { type: Date },
 fromUserId: { type: String },

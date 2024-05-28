@@ -1,9 +1,9 @@
 import httpStatus from 'http-status';
 import { createUser, findPreferredUser, findUserByEmail, findUserById, populateDummyUser, updateUserById } from '../db/users';
 import { encrypt, random, sanitizeEmail } from '../utils';
-import { ErroHandler } from '../config/errorHandler';
 import { MISSING_PARAMETER, SWIPE_LIMIT_REACHED, USER_ALREADY_EXIST, USER_NOT_FOUND } from '../utils/constant';
 import { dummyData } from '../utils/dummyData';
+import { ErroHandler } from '../config/errorHandler';
 
 const getUserById = async (id: string, getPassword: boolean) => {
 	if (getPassword) {
@@ -108,8 +108,7 @@ const swipeUser = async (id: string, isLike: boolean, userMatchId: string) => {
 		throw new ErroHandler({ name: httpStatus['400_NAME'], message: MISSING_PARAMETER, code: httpStatus.BAD_REQUEST });
 	}
 
-	const user = await findUserById(id);
-	logging.info(user);
+	const user = await findUserById(id).select('+subscription.name');
 	if (!user) {
 		throw new ErroHandler({ name: httpStatus['404_NAME'], message: USER_NOT_FOUND, code: httpStatus.NOT_FOUND });
 	}
@@ -117,7 +116,7 @@ const swipeUser = async (id: string, isLike: boolean, userMatchId: string) => {
 	const totalSwipe = user.swipes || 0;
 	const dailySwipe = user.dailySwipe || 0;
 
-	if (user.subscription!.name === 'free' && dailySwipe === 10) {
+	if ((user.subscription!.name === 'free' || user.subscription!.name !== 'swipe') && dailySwipe === 10) {
 		throw new ErroHandler({ name: httpStatus['400_NAME'], message: SWIPE_LIMIT_REACHED, code: httpStatus.BAD_REQUEST });
 	}
 
