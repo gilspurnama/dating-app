@@ -145,33 +145,33 @@ dailySwipe: { type: Number },
 dailySwipeUpdatedAt: { type: Date },
 verified: { type: Boolean },
 authentication: {
-password: { type: String, required: true, select: false },
-salt: { type: String, select: false },
-sessionToken: { type: String, select: false }
+    password: { type: String, required: true, select: false },
+    salt: { type: String, select: false },
+    sessionToken: { type: String, select: false }
 },
 subscription: {
-name: { type: String, select: false },
-id: { type: String, select: false }
+    name: { type: String, select: false },
+    id: { type: String, select: false }
 },
 matches: {
-type: Array,
-items: {
-    type: Object,
-    properties: {
-    id: { type: String, select: false },
-    updatedAt: { type: Date, select: false }
+    type: Array,
+    items: {
+        type: Object,
+        properties: {
+            id: { type: String, select: false },
+            updatedAt: { type: Date, select: false }
+        }
     }
-}
 },
 unmatches: {
-type: Array,
-items: {
-    type: Object,
-    properties: {
-    id: { type: String, select: false },
-    updatedAt: { type: Date, select: false }
+    type: Array,
+    items: {
+        type: Object,
+        properties: {
+            id: { type: String, select: false },
+            updatedAt: { type: Date, select: false }
+        }
     }
-}
 }
 ```
 
