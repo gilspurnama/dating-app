@@ -7,9 +7,9 @@ import messageRoutes from './messageRoutes';
 const router = Router();
 
 export default (): Router => {
-  userRoutes(router);
-  messageRoutes(router);
-  authorizationRoutes(router);
+	userRoutes(router);
+	messageRoutes(router);
+	authorizationRoutes(router);
 
-  return router;
+	return router;
 };
