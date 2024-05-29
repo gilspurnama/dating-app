@@ -69,6 +69,106 @@ to set up dummy data, execute POST /users/dummy/ it will insert all data inside 
 seconds and then just stop the process. The data will be successfully added, but there is still error in the API still loading.
 
 # Service Structure
+## API
+`/users` => POST = register user
+```
+    request body = 
+    {
+        email: string = user email, ex 'user@mail.com',
+        password: string = user password, ex: '123456asdfg'
+    }
+```
+    
+`/users/dummy` => POST = populate database with dummy data
+    
+`/users/:id` => GET = get user detail
+```
+    add header = 'Session-Token' : string = access token
+    request param =
+    :id : string = user ID
+```
+    
+`/users/:id` => PATCH = update user detail
+```
+    add header = 'Session-Token' : string = access token
+    request param =
+    :id : string = user ID
+    request body = 
+    {
+        firstName: string = user first name, ex: 'Ruth',
+        lastName: string = user last name, ex: 'Moore',
+        bio: string = brief description, ex: 'cat lover living in fantasy',
+        passions: string = hobby, ex: 'music, animal, hiking',
+        gender: string = user gender, option: 'Male' or 'Female',
+        preferredGender: string = user preference match, option: 'Male' or 'Female'
+    }
+```
+
+`/users/:id/preferred-users` => GET = get other user based on preference
+```
+    add header = 'Session-Token' : string = access token
+    request param = 
+    :id : string
+    request body =
+    {
+        page: number = for premium user so can view many other user profile, if free user page = 0
+    }
+```
+    
+`/users/:id/preferred-users` => POST = swipe action
+```
+    add header = 'Session-Token' : string = access token
+    request param = 
+    :id : string
+    request body =
+    {
+        isLike: boolean = for like or pass, like = true, pass = false,
+        userMatchId: string = user matched ID
+    }
+```
+    
+`/users/:id/subscriptions` => PATCH = update subscription plan
+```
+    add header = 'Session-Token' : string = access token
+    request param = 
+    :id : string
+    request body =
+    {
+        subscription: string = subscription plan, option: 'free' = free user, 'swipe' = unlimited swipe action, 'verified' = verified user, 'both' = both swipe and verified
+    }
+```
+    
+`/login` => POST = login
+```
+    request body = 
+    {
+        email: string = user email, ex 'user@mail.com',
+        password: string = user password, ex: '123456asdfg'
+    }
+```
+    
+`/messages` => POST = send message
+```
+    add header = 'Session-Token' : string = access token
+    request body =
+    { 
+        from: string = sender user ID,
+        to: string = receiver user ID,
+        message: string = the actual message
+    }
+```
+    
+`/messages/from/:from/to/:to` => GET = get conversations from sender and receiver
+```
+    add header = 'Session-Token' : string = access token
+    request param =
+    :from = sender user ID
+    :to = receiver user ID
+    request body = 
+    {
+        page: number = page for load older message
+    }
+```
 
 ## Project Structure
 
